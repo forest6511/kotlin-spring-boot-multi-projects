@@ -7,7 +7,7 @@ services:
     ports:
       - 6379:6379
     volumes:
-      - ./devops/redis/data:/data
+      - ./redis/data:/data
   # Redis Admin tool
   redis-commander:
     container_name: redis-commander
@@ -29,8 +29,8 @@ services:
       TZ: 'Asia/Tokyo'
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - ./devops/mysql/data:/var/lib/mysql
-      - ./devops/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./devops/mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/init:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306

@@ -32,7 +32,7 @@ ref: https://qiita.com/oskamathis/items/04069bc74d9e664705dd
 
 Run
 ```
-docker-compose up 
+docker-compose -f devops/main.yml up
 ```
 
 ### Mysql
