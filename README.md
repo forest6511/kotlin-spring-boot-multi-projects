@@ -1,7 +1,7 @@
 # Self-Study Kotlin Spring Boot Multi projects 
 
 ## project1 
-###Spring boot with Spring Web and Thymeleaf
+### Spring boot with Spring Web and Thymeleaf
 
 ### How to Run project1.
 
