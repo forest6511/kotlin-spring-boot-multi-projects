@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Docker Data ###
+devops/mysql/data/**
+devops/redis/data/**

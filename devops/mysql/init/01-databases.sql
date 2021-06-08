@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS `example_dev`;
+CREATE DATABASE IF NOT EXISTS `example_test`;

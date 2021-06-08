@@ -1,0 +1,36 @@
+version: '3'
+services:
+  # Redis
+  redis:
+    image: redis:latest
+    container_name: redis_host_example
+    ports:
+      - 6379:6379
+    volumes:
+      - ./devops/redis/data:/data
+  # Redis Admin tool
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - 8081:8081
+  # MySQL
+  db:
+    # Mac m1
+    image: mysql/mysql-server
+    container_name: mysql_host_example
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_HOST: '%'
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./devops/mysql/data:/var/lib/mysql
+      - ./devops/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./devops/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306

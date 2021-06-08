@@ -28,6 +28,37 @@ http://localhost:8181/
 ## Flyway Directory - TBD
 ref: https://qiita.com/kazzool/items/ab85d1f67813b9d438ff
 
+## Devops Directory
+
+Run
+```
+docker-compose up 
+```
+
+### Mysql
+
+| env      | value                       | 
+| -------- | --------------------------- | 
+| port     | 3306                        | 
+| user     | root                        | 
+| password | password                    | 
+| schemas  | example_dev<br>example_test | 
+
+### Redis
+
+| env      | value                       | 
+| -------- | --------------------------- | 
+| port     | 6379                        | 
+
+### etc
+
+```
+docker system prune
+rm -rf ./devops/mysql/data
+rm -rf ./devops/redis/data
+```
+
+
 ## Others
 
 - [ ] Use GitHub Actions
