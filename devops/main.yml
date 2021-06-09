@@ -18,6 +18,24 @@ services:
       - REDIS_HOSTS=local:redis:6379
     ports:
       - 8081:8081
+  # Flyway - Workaround Refactor candidate
+  flyway_dev:
+    image: flyway/flyway
+    container_name: flyway_example_dev
+    command: -url=jdbc:mysql://db/example_dev -user=root -password=password  migrate
+    volumes:
+      - ../ddl:/flyway/sql
+    depends_on:
+      - db
+  flyway_test:
+    image: flyway/flyway
+    container_name: flyway_example_test
+    command: -url=jdbc:mysql://db/example_test -user=root -password=password  migrate
+    volumes:
+      - ../ddl:/flyway/sql
+    depends_on:
+      - db
+      - flyway_dev
   # MySQL
   db:
     # Mac m1
