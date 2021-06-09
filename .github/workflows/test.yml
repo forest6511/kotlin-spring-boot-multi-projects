@@ -13,5 +13,8 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - name: Set up Docker Compose
+        run: |
+          docker-compose -f devops/main.yml up -d
       - name: Build with Gradle
         run: ./gradlew build
