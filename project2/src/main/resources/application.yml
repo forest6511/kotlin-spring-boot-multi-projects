@@ -1,0 +1,10 @@
+spring:
+  thymeleaf:
+    cache: false
+  r2dbc:
+    url: r2dbc:pool:mysql://localhost:3306/example_dev?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: password
+
+server:
+  port: 8282
