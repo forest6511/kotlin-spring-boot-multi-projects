@@ -33,6 +33,7 @@ build/
 .vscode/
 
 .gradle/**
+!**.gradle/
 
 ### Docker Data ###
 devops/mysql/data/**
