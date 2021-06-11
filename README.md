@@ -27,9 +27,10 @@ http://localhost:8181/
 
 ## Flyway
 
-- development evn
+- development and testing evn
 ```
-./gradlew :migrate:dev
+./gradlew :migration:migrateDev
+./gradlew :migration:migrateTest
 ```
 
 ## Devops Directory

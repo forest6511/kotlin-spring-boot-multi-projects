@@ -1,3 +1,2 @@
 rootProject.name = "multi-project-spring-boot-kotlin"
-include("project1")
-include("migration")
+include("project1", "migration")
