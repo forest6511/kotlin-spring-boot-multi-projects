@@ -16,5 +16,10 @@ jobs:
       - name: Set up Docker Compose
         run: |
           docker-compose -f devops/main.yml up -d
+      - name: Wait Database
+        run: docker-compose -f docker/main.yml run wait db:3306 -- echo "mysql.server is up"
+      # TODO change schema to example_test
+      - name: Flyway migration
+        run: ./gradlew :migration:migrateDev
       - name: Build with Gradle
         run: ./gradlew build
