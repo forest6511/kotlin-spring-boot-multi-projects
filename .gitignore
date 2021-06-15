@@ -38,3 +38,6 @@ build/
 ### Docker Data ###
 docker/mysql/data/**
 docker/redis/data/**
+
+### MyBatis GEN ###
+FlywaySchema*.kt

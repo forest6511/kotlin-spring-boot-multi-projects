@@ -2,7 +2,7 @@
 
 ## docker directory
 
-Run
+run docker
 ```
 docker-compose -f docker/main.yml up
 ```
@@ -33,6 +33,10 @@ rm -rf ./docker/redis/data
 ### How to Run project1.
 
 ```
+./gradlew :project1:mbGenerator
+```
+
+```
 ./gradlew :project1:bootRun
 ```
 
@@ -41,8 +45,7 @@ It's OK if The message 'Hello Project1' is Shown the url below.
 http://localhost:8181/
 ```
 
-#### TODO
-- [x] Implement Spring JPA
+- [] Implement Spring Mybatis
 
 ## project2
 ### Spring boot with Flux and R2DB2
@@ -56,11 +59,8 @@ It's OK if The message 'Hello Project2' is Shown the url below.
 http://localhost:8282/
 ```
 
-## common directory
-### Shared project like Entity
-
-- [ ] Create entity and confirm it' works fine.
-
+- [] Implement R2DB2
+- [] Redis Stream
 
 ## Others
 

@@ -13,6 +13,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      # Refactoring candidate - GitHub action service?
       - name: Set up Docker Compose
         run: |
           docker-compose -f docker/main.yml up -d
