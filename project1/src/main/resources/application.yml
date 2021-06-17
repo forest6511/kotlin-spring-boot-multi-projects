@@ -1,9 +1,6 @@
-# SQLログ出力
 logging:
   level:
-    org.hibernate.SQL: debug
-    org.hibernate.type.EnumType: trace
-    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    com.example.project1: debug
 
 spring:
   datasource:
@@ -20,8 +17,6 @@ spring:
       auto-commit: false
   jmx:
     enabled: false
-  jpa:
-    show-sql: true
   thymeleaf:
     cache: false
 

@@ -1,11 +1,8 @@
-package com.example.project1
+package com.example.mapper
 
 import com.example.project1.domain.CategoryRecord
+import com.example.project1.repository.mapper.*
 import com.example.project1.repository.mapper.CategoryDynamicSqlSupport.Category
-import com.example.project1.repository.mapper.CategoryMapper
-import com.example.project1.repository.mapper.count
-import com.example.project1.repository.mapper.insert
-import com.example.project1.repository.mapper.select
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.mybatis.dynamic.sql.SqlBuilder.isEqualTo
@@ -14,17 +11,19 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
+/*
+ * https://github.com/mybatis/mybatis-dynamic-sql/blob/master/src/test/kotlin/examples/kotlin/mybatis3/canonical/PersonMapperTest.kt
+ */
 @Transactional
 @SpringBootTest
-class Project1ApplicationTests(
+class DynamicMapperTest(
     @Autowired val categoryMapper: CategoryMapper
 ) {
 
-    // https://github.com/mybatis/mybatis-dynamic-sql/blob/master/src/test/kotlin/examples/kotlin/mybatis3/canonical/PersonMapperTest.kt
     @Test
     fun `select all category`() {
         val rows = categoryMapper.select { allRows() }
-        rows.forEach { it ->
+        rows.forEach {
             println(it)
         }
     }
@@ -71,6 +70,34 @@ class Project1ApplicationTests(
 
         // Id is set after inserting.
         assertTrue((record.id != null))
+    }
+
+    @Test
+    fun `update one category`() {
+        val record = CategoryRecord(
+            name = "テストカテゴリ",
+            orderBy = 5,
+            updatedAt = Date(),
+            createdAt = Date()
+        )
+
+        assertTrue((record.id == null))
+
+        categoryMapper.insert(record)
+
+        categoryMapper.update{
+            set(Category.name).equalTo("テストカテゴリ1")
+            set(Category.orderBy).equalTo(7)
+            where(Category.id, isEqualTo(record.id))
+        }
+
+        val row = categoryMapper.selectOne{
+            where(Category.id, isEqualTo(record.id))
+        }
+
+        if (row != null) {
+            assertEquals("テストカテゴリ1", row.name)
+        }
     }
 
 
