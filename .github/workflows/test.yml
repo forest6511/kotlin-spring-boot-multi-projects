@@ -23,4 +23,4 @@ jobs:
       - name: Flyway migration
         run: ./gradlew :migration:migrateDev
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew build --scan
