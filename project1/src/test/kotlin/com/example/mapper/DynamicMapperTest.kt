@@ -1,9 +1,11 @@
 package com.example.mapper
 
+import com.example.project1.Project1Application
 import com.example.project1.domain.CategoryRecord
 import com.example.project1.repository.mapper.*
 import com.example.project1.repository.mapper.CategoryDynamicSqlSupport.Category
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.mybatis.dynamic.sql.SqlBuilder.isEqualTo
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,7 +17,7 @@ import java.util.*
  * https://github.com/mybatis/mybatis-dynamic-sql/blob/master/src/test/kotlin/examples/kotlin/mybatis3/canonical/PersonMapperTest.kt
  */
 @Transactional
-@SpringBootTest
+@SpringBootTest(classes = [Project1Application::class])
 class DynamicMapperTest(
     @Autowired val categoryMapper: CategoryMapper
 ) {
@@ -85,13 +87,13 @@ class DynamicMapperTest(
 
         categoryMapper.insert(record)
 
-        categoryMapper.update{
+        categoryMapper.update {
             set(Category.name).equalTo("テストカテゴリ1")
             set(Category.orderBy).equalTo(7)
             where(Category.id, isEqualTo(record.id))
         }
 
-        val row = categoryMapper.selectOne{
+        val row = categoryMapper.selectOne {
             where(Category.id, isEqualTo(record.id))
         }
 
