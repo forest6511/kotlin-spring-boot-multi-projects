@@ -1,16 +1,16 @@
 /*
  * Auto-generated file. Created by MyBatis Generator
  */
-package com.example.project1.repository.mapper
+package com.example.project1.repository.mapper.base
 
-import com.example.project1.domain.SubCategoryRecord
-import com.example.project1.repository.mapper.SubCategoryDynamicSqlSupport.SubCategory
-import com.example.project1.repository.mapper.SubCategoryDynamicSqlSupport.SubCategory.categoryId
-import com.example.project1.repository.mapper.SubCategoryDynamicSqlSupport.SubCategory.createdAt
-import com.example.project1.repository.mapper.SubCategoryDynamicSqlSupport.SubCategory.id
-import com.example.project1.repository.mapper.SubCategoryDynamicSqlSupport.SubCategory.name
-import com.example.project1.repository.mapper.SubCategoryDynamicSqlSupport.SubCategory.orderBy
-import com.example.project1.repository.mapper.SubCategoryDynamicSqlSupport.SubCategory.updatedAt
+import com.example.project1.domain.base.SubCategoryRecord
+import com.example.project1.repository.mapper.base.SubCategoryDynamicSqlSupport.SubCategory
+import com.example.project1.repository.mapper.base.SubCategoryDynamicSqlSupport.SubCategory.categoryId
+import com.example.project1.repository.mapper.base.SubCategoryDynamicSqlSupport.SubCategory.createdAt
+import com.example.project1.repository.mapper.base.SubCategoryDynamicSqlSupport.SubCategory.id
+import com.example.project1.repository.mapper.base.SubCategoryDynamicSqlSupport.SubCategory.name
+import com.example.project1.repository.mapper.base.SubCategoryDynamicSqlSupport.SubCategory.orderBy
+import com.example.project1.repository.mapper.base.SubCategoryDynamicSqlSupport.SubCategory.updatedAt
 import org.mybatis.dynamic.sql.SqlBuilder.isEqualTo
 import org.mybatis.dynamic.sql.util.kotlin.*
 import org.mybatis.dynamic.sql.util.kotlin.mybatis3.*

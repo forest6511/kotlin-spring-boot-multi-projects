@@ -1,9 +1,10 @@
 package com.example.mapper
 
 import com.example.project1.Project1Application
-import com.example.project1.domain.CategoryRecord
-import com.example.project1.repository.mapper.*
-import com.example.project1.repository.mapper.CategoryDynamicSqlSupport.Category
+import com.example.project1.domain.base.CategoryRecord
+import com.example.project1.repository.mapper.base.*
+import com.example.project1.repository.mapper.base.CategoryDynamicSqlSupport.Category
+import com.example.project1.repository.mapper.base.CategoryMapper
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

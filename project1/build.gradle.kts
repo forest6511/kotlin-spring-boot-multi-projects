@@ -2,6 +2,7 @@ plugins {
     id("com.thinkimi.gradle.MybatisGenerator")
     id("org.springframework.boot")
     id("io.spring.dependency-management")
+    id ("org.jetbrains.kotlin.plugin.noarg")
     kotlin("jvm")
     kotlin("plugin.spring")
 }
@@ -38,4 +39,8 @@ mybatisGenerator {
         // It dose not need to put the classpath location in generatorConfig.xml if declare it here.
         mybatisGenerator("mysql:mysql-connector-java")
     }
+}
+
+noArg {
+    annotation("com.example.project1.Data")
 }

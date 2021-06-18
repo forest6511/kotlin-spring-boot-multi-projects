@@ -15,10 +15,10 @@
             <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
         <javaModelGenerator
-                targetPackage="com.example.project1.domain"
+                targetPackage="com.example.project1.domain.base"
                 targetProject="project1/src/main/kotlin"/>
         <javaClientGenerator
-                targetPackage="com.example.project1.repository.mapper"
+                targetPackage="com.example.project1.repository.mapper.base"
                 targetProject="project1/src/main/kotlin"/>
         <table tableName="%">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />

@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 // apply false means that parent project is not applied
 plugins {
+	id ("org.jetbrains.kotlin.plugin.noarg") version "1.5.10" apply false
 	id("com.thinkimi.gradle.MybatisGenerator") version "2.3" apply false // gradle 7.0 support.
 	id("org.flywaydb.flyway") version "7.10.0" apply false
 	id("org.springframework.boot") version "2.5.1" apply false

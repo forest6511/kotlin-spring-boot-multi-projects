@@ -1,7 +1,7 @@
 /*
  * Auto-generated file. Created by MyBatis Generator
  */
-package com.example.project1.repository.mapper
+package com.example.project1.repository.mapper.base
 
 import java.sql.JDBCType
 import java.util.Date
