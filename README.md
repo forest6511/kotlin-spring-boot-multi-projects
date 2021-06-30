@@ -59,8 +59,8 @@ It's OK if The message 'Hello Project2' is Shown the url below.
 http://localhost:8282/
 ```
 
-- [] Implement R2DB2
-- [] Redis Stream
+- [ ] Implement R2DB2
+- [ ] Redis Stream
 
 ## Others
 

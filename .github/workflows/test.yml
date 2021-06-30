@@ -5,7 +5,26 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    services:
+      # サービスコンテナへのアクセスに使われるラベル
+      redis:
+        # Docker Hubのイメージ
+        image: redis
+        # redisが起動するまで待つヘルスチェックの設定
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: example_test
+          TZ: "Asia/Tokyo"
+        ports:
+          - 3307:3306
+        options: --health-cmd "mysqladmin ping -h 127.0.0.1" --health-interval 20s --health-timeout 10s --health-retries 10
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -13,12 +32,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      # Refactoring candidate - GitHub action service?
-      - name: Set up Docker Compose
-        run: |
-          docker-compose -f docker/main.yml up -d
-      - name: Wait Database
-        run: docker-compose -f docker/main.yml run wait db:3306 -- echo "mysql.server is up"
       # TODO change schema to example_test
       - name: Flyway migration
         run: ./gradlew :migration:migrateDev
