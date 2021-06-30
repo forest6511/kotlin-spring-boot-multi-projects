@@ -21,7 +21,7 @@ jobs:
           MYSQL_DATABASE: example_test
           TZ: "Asia/Tokyo"
         ports:
-          - 3307:3306
+          - 3306:3306
         options: >-
             --health-cmd "mysqladmin ping -h 127.0.0.1"
             --health-interval 20s
