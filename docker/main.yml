@@ -34,5 +34,3 @@ services:
       - ./mysql/init:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
-  wait:
-    image: willwill/wait-for-it:latest
