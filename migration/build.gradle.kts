@@ -18,7 +18,7 @@ task("migrateDev", org.flywaydb.gradle.task.FlywayMigrateTask::class) {
 }
 
 task("migrateTest", org.flywaydb.gradle.task.FlywayMigrateTask::class) {
-	url = System.getenv("DB_URL") ?: "jdbc:mysql://localhost:3306/example_test"
+	url = System.getenv("DB_URL") ?: "jdbc:mysql://127.0.0.1:3306/example_test"
 	user = System.getenv("DB_USER") ?: "root"
 	password = System.getenv("DB_PASSWORD") ?: "password"
 	baselineOnMigrate = true
