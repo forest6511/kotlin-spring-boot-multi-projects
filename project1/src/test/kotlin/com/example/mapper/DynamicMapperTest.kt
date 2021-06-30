@@ -1,27 +1,21 @@
 package com.example.mapper
 
-import com.example.project1.Project1Application
 import com.example.project1.domain.base.CategoryRecord
 import com.example.project1.repository.mapper.base.*
 import com.example.project1.repository.mapper.base.CategoryDynamicSqlSupport.Category
-import com.example.project1.repository.mapper.base.CategoryMapper
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.mybatis.dynamic.sql.SqlBuilder.isEqualTo
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 /*
  * https://github.com/mybatis/mybatis-dynamic-sql/blob/master/src/test/kotlin/examples/kotlin/mybatis3/canonical/PersonMapperTest.kt
  */
-@Transactional
-@SpringBootTest(classes = [Project1Application::class])
 class DynamicMapperTest(
     @Autowired val categoryMapper: CategoryMapper
-) {
+) : BaseTest() {
 
     @Test
     fun `select all category`() {
