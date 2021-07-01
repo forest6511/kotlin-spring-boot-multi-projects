@@ -61,6 +61,7 @@ http://localhost:8282/
 
 - [ ] Implement R2DB2
 - [ ] Redis Stream
+- [ ] SSE client
 
 ## Others
 
