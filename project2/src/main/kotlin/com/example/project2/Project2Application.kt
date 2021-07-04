@@ -11,5 +11,5 @@ import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 class Project2Application
 
 fun main(args: Array<String>) {
-	runApplication<Project2Application>(*args)
+    runApplication<Project2Application>(*args)
 }

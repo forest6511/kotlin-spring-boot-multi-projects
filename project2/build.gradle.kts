@@ -1,6 +1,7 @@
 plugins {
 	id("org.springframework.boot")
 	id("io.spring.dependency-management")
+	id ("org.jetbrains.kotlin.plugin.noarg")
 	kotlin("jvm")
 	kotlin("plugin.spring")
 }
@@ -31,4 +32,8 @@ configurations {
 		exclude(group = "org.springframework.boot:spring-boot-starter-webflux", module = "spring-boot-starter-tomcat")
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+}
+
+noArg {
+	annotation("com.example.project2.config.Data")
 }
