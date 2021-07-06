@@ -59,6 +59,19 @@ It's OK if The message 'Hello Project2' is Shown the url below.
 http://localhost:8282/
 ```
 
+Redis put message
+```
+curl --location --request PUT 'http://localhost:8282/message/put/123' \
+--header 'Content-Type: application/json' \
+--data-raw ' {"message" : "test"}'
+```
+
+Redis SSE
+```
+curl http://localhost:8282/message/get/123
+```
+ref: https://github.com/spring-projects/spring-data-redis/blob/main/src/test/java/org/springframework/data/redis/stream/StreamReceiverIntegrationTests.java
+
 - [ ] Implement R2DB2
 - [ ] Redis Stream
 - [ ] SSE client

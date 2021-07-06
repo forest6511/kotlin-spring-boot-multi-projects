@@ -1,0 +1,46 @@
+package com.example.project2.controller
+
+import com.example.project2.vm.Message
+import org.slf4j.LoggerFactory
+import org.springframework.data.redis.connection.stream.*
+import org.springframework.data.redis.core.ReactiveRedisOperations
+import org.springframework.data.redis.stream.StreamReceiver
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.*
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+
+@RestController
+@RequestMapping("/message")
+class MessageController(
+    private val redisOperations: ReactiveRedisOperations<String, Message>,
+    private val receiver: StreamReceiver<String, ObjectRecord<String, Message>>,
+) {
+
+    private val log = LoggerFactory.getLogger(javaClass)
+
+
+    @CrossOrigin
+    @GetMapping(path = ["/get/{roomId}"], produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    fun streamEvents(@PathVariable roomId: String): Flux<Message> {
+//        return receiver.receive(StreamOffset.create(roomId, ReadOffset.lastConsumed())).map { msg ->
+//            log.info("get messages=$msg")
+//            msg.value
+//        }
+        return receiver.receive(StreamOffset.fromStart(roomId)).map { msg ->
+            log.info("get messages=$msg")
+            msg.value
+        }
+
+    }
+
+    @PutMapping("/put/{roomId}")
+    fun put(@RequestBody message: Mono<Message>, @PathVariable roomId: String): Mono<RecordId> {
+        return message.flatMap { msg ->
+            val record: ObjectRecord<String, Message> = StreamRecords.newRecord()
+                .ofObject(msg).withStreamKey(roomId)
+            log.info("put message=$record")
+            redisOperations.opsForStream<Any, Message>().add(record)
+        }
+    }
+}

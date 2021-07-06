@@ -1,6 +1,7 @@
 logging:
   level:
-    root: debug
+    root: info
+    okhttp3: trace
     com.example.project2: debug
 
 spring:
@@ -17,4 +18,4 @@ spring:
     port: 6379
 
 server:
-  port: 8282
+  port: 0

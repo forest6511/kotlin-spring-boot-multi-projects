@@ -21,6 +21,9 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
+
+	implementation("com.squareup.okhttp3:okhttp:4.9.1")
+	implementation("com.github.heremaps:oksse:0.9.0")
 }
 
 tasks.withType<Test> {
