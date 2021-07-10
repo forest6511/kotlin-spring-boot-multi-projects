@@ -25,6 +25,7 @@ class MessageControllerTest(
     val putUrl = "/${PathTemplate.MESSAGE.path}/put"
     val getUrl = "/${PathTemplate.MESSAGE.path}/get"
 
+    val localhost = "http://127.0.0.1:"
     @LocalServerPort
     var randomServerPort = 0
 
@@ -49,7 +50,7 @@ class MessageControllerTest(
             .consumeWith { response -> //println(response)
             }
 
-        val url = "http://127.0.0.1:$randomServerPort$getUrl/$randomInt"
+        val url = "$localhost$randomServerPort$getUrl/$randomInt"
         val request: Request = Request.Builder().url(url).build()
         val okSse = OkSse()
         val sse: ServerSentEvent = okSse.newServerSentEvent(
@@ -88,13 +89,7 @@ class MessageControllerTest(
             })
         sse.request()
 
-        webTestClient.put().uri("$putUrl/$randomInt")
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(Mono.just(requestMessage), Message::class.java)
-            .exchange()
-            .expectStatus().isOk
-
-        Thread.sleep(2_000)
+        //Thread.sleep(2_000)
         sse.close()
     }
 
