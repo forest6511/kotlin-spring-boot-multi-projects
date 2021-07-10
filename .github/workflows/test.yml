@@ -36,5 +36,7 @@ jobs:
           distribution: 'adopt'
       - name: Flyway migration
         run: ./gradlew :migration:migrateTest
+      - name: Gradle Version
+        run: ./gradlew build --version
       - name: Build with Gradle
         run: ./gradlew build --stacktrace
