@@ -39,4 +39,4 @@ jobs:
       - name: Gradle Version
         run: ./gradlew build --version
       - name: Build with Gradle
-        run: ./gradlew build -Porg.gradle.parallel=false --stacktrace
+        run: ./gradlew  --stacktrace
