@@ -22,7 +22,6 @@ class MessageControllerTest(
     @Autowired val webTestClient: WebTestClient,
 ) : BaseTest() {
 
-    // 登録
     val putUrl = "/${PathTemplate.MESSAGE.path}/put"
     val getUrl = "/${PathTemplate.MESSAGE.path}/get"
 
@@ -74,9 +73,7 @@ class MessageControllerTest(
                 }
 
                 override fun onRetryError(
-                    sse: ServerSentEvent?,
-                    throwable: Throwable?,
-                    response: Response?
+                    sse: ServerSentEvent?, throwable: Throwable?, response: Response?
                 ): Boolean {
                     return true
                 }
@@ -97,7 +94,7 @@ class MessageControllerTest(
             .exchange()
             .expectStatus().isOk
 
-        Thread.sleep(1_000)
+        Thread.sleep(2_000)
         sse.close()
     }
 
