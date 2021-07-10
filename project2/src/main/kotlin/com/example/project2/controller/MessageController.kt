@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono
 @RequestMapping("/message")
 class MessageController(
     private val redisOperations: ReactiveRedisOperations<String, Message>,
-    private val receiver: StreamReceiver<String, ObjectRecord<String, Message>>,
+    private val receiver: StreamReceiver<String, MapRecord<String, String, String>>
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -23,15 +23,25 @@ class MessageController(
     @CrossOrigin
     @GetMapping(path = ["/get/{roomId}"], produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
     fun streamEvents(@PathVariable roomId: String): Flux<Message> {
-//        return receiver.receive(StreamOffset.create(roomId, ReadOffset.lastConsumed())).map { msg ->
-//            log.info("get messages=$msg")
-//            msg.value
-//        }
         return receiver.receive(StreamOffset.fromStart(roomId)).map { msg ->
-            log.info("get messages=$msg")
-            msg.value
+            log.info("get messages:$msg")
+            Message(
+                recordId = msg.id.value,
+                message = msg.value["message"]!!
+            )
         }
+    }
 
+    @CrossOrigin
+    @GetMapping(path = ["/get/{roomId}/offset"], produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    fun streamEventsFrom(@PathVariable roomId: String, @PathVariable offset: String): Flux<Message> {
+        return receiver.receive(StreamOffset.create(roomId, ReadOffset.from("offset"))).map { msg ->
+            log.info("get offset:$offset messages:$msg")
+            Message(
+                recordId = msg.id.value,
+                message = msg.value["message"]!!
+            )
+        }
     }
 
     @PutMapping("/put/{roomId}")

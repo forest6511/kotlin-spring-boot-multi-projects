@@ -5,6 +5,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory
+import org.springframework.data.redis.connection.stream.MapRecord
 import org.springframework.data.redis.connection.stream.ObjectRecord
 import org.springframework.data.redis.core.ReactiveRedisOperations
 import org.springframework.data.redis.core.ReactiveRedisTemplate
@@ -29,11 +30,12 @@ class RedisConfiguration {
     }
 
     @Bean
-    fun streamReceiver(factory: ReactiveRedisConnectionFactory?): StreamReceiver<String, ObjectRecord<String, Message>>? {
+    fun streamReceiver(factory: ReactiveRedisConnectionFactory?): StreamReceiver<String, MapRecord<String, String, String>>? {
 
-        val receiverOptions = StreamReceiverOptions.builder()
-            .targetType(Message::class.java).build()
+//        val receiverOptions = StreamReceiverOptions.builder()
+//            .targetType(Message::class.java).build()
+//        return StreamReceiver.create(factory, receiverOptions)
+        return StreamReceiver.create(factory)
 
-        return StreamReceiver.create(factory, receiverOptions)
     }
 }

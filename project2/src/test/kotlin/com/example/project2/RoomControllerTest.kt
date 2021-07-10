@@ -2,9 +2,14 @@ package com.example.project2
 
 import com.example.project2.controller.PathTemplate
 import com.example.project2.vm.Message
+import com.google.gson.Gson
 import com.here.oksse.OkSse
+import com.here.oksse.ServerSentEvent
 import okhttp3.Request
+import okhttp3.Response
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.MediaType
@@ -29,8 +34,11 @@ class RoomControllerTest(
 
         val randomInt = Random.nextInt(5)
 
+        val message = "TEST123"
+
         val requestMessage = Message(
-            message = "TEST123"
+            recordId = "",
+            message = message
         )
 
         webTestClient.put().uri("$putUrl/$randomInt")
@@ -38,12 +46,49 @@ class RoomControllerTest(
             .body(Mono.just(requestMessage), Message::class.java)
             .exchange()
             .expectStatus().isOk
-        //.expectBody(Message::class.java).returnResult().responseBody!!
+            .expectBody()
+            .consumeWith { response -> //println(response)
+            }
 
-        val url: String = "http://127.0.0.1:$randomServerPort/message/get/$randomInt"
+        val url = "http://127.0.0.1:$randomServerPort$getUrl/$randomInt"
         val request: Request = Request.Builder().url(url).build()
         val okSse = OkSse()
-        val sse: com.here.oksse.ServerSentEvent = okSse.newServerSentEvent(request, SSEListener())
+        val sse: ServerSentEvent = okSse.newServerSentEvent(
+            request, object : ServerSentEvent.Listener {
+                private val log = LoggerFactory.getLogger(javaClass)
+
+                override fun onOpen(sse: ServerSentEvent?, response: Response?) {
+                }
+
+                override fun onMessage(sse: ServerSentEvent?, id: String?, event: String?, response: String?) {
+                    log.debug("$response")
+                    val msg: Message = Gson().fromJson(response, Message::class.java)
+                    assertEquals(message, msg.message)
+                }
+
+                override fun onComment(sse: ServerSentEvent?, comment: String?) {
+                }
+
+                override fun onRetryTime(sse: ServerSentEvent?, milliseconds: Long): Boolean {
+                    return true
+                }
+
+                override fun onRetryError(
+                    sse: ServerSentEvent?,
+                    throwable: Throwable?,
+                    response: Response?
+                ): Boolean {
+                    return true
+                }
+
+                override fun onClosed(sse: ServerSentEvent?) {
+                }
+
+                override fun onPreRetry(sse: ServerSentEvent?, originalRequest: Request?): Request {
+                    return originalRequest!!
+                }
+
+            })
         sse.request()
 
         webTestClient.put().uri("$putUrl/$randomInt")
@@ -51,18 +96,9 @@ class RoomControllerTest(
             .body(Mono.just(requestMessage), Message::class.java)
             .exchange()
             .expectStatus().isOk
-        //.expectBody(Message::class.java).returnResult().responseBody!!
 
         Thread.sleep(1_000)
         sse.close()
-//
-//        val listRoom: MutableList<Room> = webTestClient.get().uri("$getUrl/${room.roomId}")
-//            .exchange()
-//            .expectStatus().isOk
-//            .expectBodyList(Room::class.java).returnResult()
-//            .responseBody!!
-//
-//        assertEquals(room.roomId, roomIdGenerator.generateId(listRoom[0].userId!!, listRoom[1].userId!!))
     }
 
 }
