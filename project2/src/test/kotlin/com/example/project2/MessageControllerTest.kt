@@ -38,6 +38,7 @@ class MessageControllerTest(
 
         val randomInt = Random.nextInt(5)
         val message = "TEST123"
+        var hasReceivedMessage = false
         putMessage(message, randomInt)
 
         val url = "$localhost$randomServerPort$getUrl/$randomInt"
@@ -53,7 +54,10 @@ class MessageControllerTest(
                 override fun onMessage(sse: ServerSentEvent?, id: String?, event: String?, response: String?) {
                     log.debug("$response")
                     val msg: Message = Gson().fromJson(response, Message::class.java)
-                    //assertEquals(message, msg.message)
+                    if(!hasReceivedMessage){
+                        assertEquals(message, msg.message)
+                    }
+                    hasReceivedMessage = true
                 }
 
                 override fun onComment(sse: ServerSentEvent?, comment: String?) {
@@ -78,6 +82,7 @@ class MessageControllerTest(
 
             })
         sse.request()
+        Thread.sleep(1_000)
         sse.close()
     }
 
