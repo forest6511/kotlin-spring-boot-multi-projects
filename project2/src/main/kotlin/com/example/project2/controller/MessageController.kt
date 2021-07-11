@@ -24,7 +24,7 @@ class MessageController(
     @GetMapping(path = ["/get/{roomId}"], produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
     fun streamEvents(@PathVariable roomId: String): Flux<Message> {
         return receiver.receive(StreamOffset.fromStart(roomId)).map { msg ->
-            log.info("get messages:$msg")
+            log.debug("get messages:$msg")
             Message(
                 recordId = msg.id.value,
                 message = msg.value["message"]!!
@@ -36,7 +36,7 @@ class MessageController(
     @GetMapping(path = ["/get/{roomId}/offset"], produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
     fun streamEventsFrom(@PathVariable roomId: String, @PathVariable offset: String): Flux<Message> {
         return receiver.receive(StreamOffset.create(roomId, ReadOffset.from("offset"))).map { msg ->
-            log.info("get offset:$offset messages:$msg")
+            log.debug("get offset:$offset messages:$msg")
             Message(
                 recordId = msg.id.value,
                 message = msg.value["message"]!!
@@ -49,7 +49,7 @@ class MessageController(
         return message.flatMap { msg ->
             val record: ObjectRecord<String, Message> = StreamRecords.newRecord()
                 .ofObject(msg).withStreamKey(roomId)
-            log.info("put message=$record")
+            log.debug("put message=$record")
             redisOperations.opsForStream<Any, Message>().add(record)
         }
     }

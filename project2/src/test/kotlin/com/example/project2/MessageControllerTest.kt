@@ -7,7 +7,6 @@ import com.here.oksse.OkSse
 import com.here.oksse.ServerSentEvent
 import okhttp3.Request
 import okhttp3.Response
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,11 +25,12 @@ class MessageControllerTest(
     val getUrl = "/${PathTemplate.MESSAGE.path}/get"
 
     val localhost = "http://127.0.0.1:"
+
     @LocalServerPort
     var randomServerPort = 0
 
     @Test
-    fun `Put message and Get message`() {
+    fun `SSE Message`() {
 
         val randomInt = Random.nextInt(5)
 
@@ -88,8 +88,6 @@ class MessageControllerTest(
 
             })
         sse.request()
-
-        //Thread.sleep(2_000)
         sse.close()
     }
 
