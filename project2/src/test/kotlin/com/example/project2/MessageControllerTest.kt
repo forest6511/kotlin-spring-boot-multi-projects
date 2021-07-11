@@ -52,8 +52,8 @@ class MessageControllerTest(
                 }
 
                 override fun onMessage(sse: ServerSentEvent?, id: String?, event: String?, response: String?) {
-                    log.debug("$response")
                     val msg: Message = Gson().fromJson(response, Message::class.java)
+                    // Check one message, Otherwise exception happen on github actions
                     if(!hasReceivedMessage){
                         assertEquals(message, msg.message)
                     }
@@ -88,7 +88,7 @@ class MessageControllerTest(
 
     @Test
     fun `SSE Message #2`() {
-        var isAlive: Boolean = true
+        var isAlive = true
         var hasReceivedMessage = false
 
         val message = "12345678"
@@ -103,6 +103,7 @@ class MessageControllerTest(
 
             override fun onMessage(sse: ServerSentEvent, id: String?, event: String, message: String) {
                 val msg: Message = Gson().fromJson(message, Message::class.java)
+                // Check one message, Otherwise exception happen on github actions
                 if(!hasReceivedMessage){
                     assertEquals("12345678", msg.message)
                 }
