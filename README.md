@@ -45,7 +45,7 @@ It's OK if The message 'Hello Project1' is Shown the url below.
 http://localhost:8181/
 ```
 
-- [] Implement Spring Mybatis
+- [x] Implement Spring Mybatis
 
 ## project2
 ### Spring boot with Flux and R2DB2
@@ -72,10 +72,10 @@ curl http://localhost:8282/message/get/123
 ```
 ref: https://github.com/spring-projects/spring-data-redis/blob/main/src/test/java/org/springframework/data/redis/stream/StreamReceiverIntegrationTests.java
 
-- [ ] Implement R2DB2
-- [ ] Redis Stream
-- [ ] SSE client
+- [ ] R2DB2
+- [x] Redis Stream
+- [x] SSE client
 
 ## Others
 
-- [ ] Use GitHub Actions
+- [x] Use GitHub Actions
