@@ -46,6 +46,8 @@ http://localhost:8181/
 ```
 
 - [x] Implement Spring Mybatis
+- [ ] Implement graphql
+https://netflix.github.io/dgs/getting-started/
 
 ## project2
 ### Spring boot with Flux and R2DB2
@@ -72,7 +74,7 @@ curl http://localhost:8282/message/get/123
 ```
 ref: https://github.com/spring-projects/spring-data-redis/blob/main/src/test/java/org/springframework/data/redis/stream/StreamReceiverIntegrationTests.java
 
-- [ ] R2DB2
+- [ ] R2DBC
 - [x] Redis Stream
 - [x] SSE client
 
