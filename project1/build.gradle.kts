@@ -23,6 +23,9 @@ dependencies {
     implementation("com.zaxxer:HikariCP")
     implementation("mysql:mysql-connector-java")
 
+    implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
+    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

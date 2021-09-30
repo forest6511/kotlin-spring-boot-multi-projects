@@ -45,9 +45,16 @@ It's OK if The message 'Hello Project1' is Shown the url below.
 http://localhost:8181/
 ```
 
+You can use graphiql the url below.
+ref: https://github.com/graphql/graphiql
+```
+http://localhost:8181/graphiql
+```
+
 - [x] Implement Spring Mybatis
-- [ ] Implement graphql
-https://netflix.github.io/dgs/getting-started/
+- [x] Implement graphql
+
+ref:https://netflix.github.io/dgs/getting-started/
 
 ## project2
 ### Spring boot with Flux and R2DB2
